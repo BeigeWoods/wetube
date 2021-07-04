@@ -63,21 +63,21 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 
-const getThumbnail = (url) => {
-  const ffmpeg = require("fluent-ffmpeg");
-  const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
-  ffmpeg.setFfmpegPath(ffmpegPath);
-  ffmpeg({ source: url })
-    .on("filenames", function (filenames) {
-      thumbUrl = "uploads/thumbnails/" + filenames[0];
-    })
-    .takeScreenshots({
-      count: 1,
-      timemarks: ["00:00:01"],
-      folder: "uploads/thumbnails",
-      filename: `thumbnail_${Date.now()}.png`,
-    });
-};
+// const getThumbnail = (url) => {
+//   const ffmpeg = require("fluent-ffmpeg");
+//   const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+//   ffmpeg.setFfmpegPath(ffmpegPath);
+//   ffmpeg({ source: url })
+//     .on("filenames", function (filenames) {
+//       thumbUrl = "uploads/thumbnails/" + filenames[0];
+//     })
+//     .takeScreenshots({
+//       count: 1,
+//       timemarks: ["00:00:01"],
+//       folder: "uploads/thumbnails",
+//       filename: `thumbnail_${Date.now()}.png`,
+//     });
+// };
 
 export const postUpload = async (req, res) => {
   const {
@@ -86,7 +86,7 @@ export const postUpload = async (req, res) => {
   // const { path: fileUrl } = req.file;
   const { video, thumb } = req.files;
   const { title, description, hashtags } = req.body;
-  getThumbnail(video[0].path);
+  // getThumbnail(video[0].path);
   try {
     const newVideo = await Video.create({
       title,
@@ -96,7 +96,6 @@ export const postUpload = async (req, res) => {
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
-    // console.log(newVideo);
     const user = await User.findById(_id);
     user.videos.push(newVideo._id);
     user.save();

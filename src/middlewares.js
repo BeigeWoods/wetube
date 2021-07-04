@@ -48,24 +48,25 @@ export const avatarUpload = multer({
   storage: multerUploader,
 });
 
-const videoExtension = multer.diskStorage({
-  destination: function (req, file, cd) {
-    cd(null, "uploads/videos/");
-  },
-  filename: function (req, file, cd) {
-    cd(null, `${Date.now()}_${file.originalname}`);
-  },
-  limits: {
-    fileSize: 10000000,
-  },
-  storage: multerUploader,
-});
-
-export const videoUpload = multer({ storage: videoExtension });
-
-// export const videoUpload = multer({
-//   dest: "uploads/videos/",
+// const videoExtension = multer.diskStorage({
+//   destination: function (req, file, cd) {
+//     cd(null, "uploads/videos/");
+//   },
+//   filename: function (req, file, cd) {
+//     cd(null, `${Date.now()}_${file.originalname}`);
+//   },
 //   limits: {
 //     fileSize: 10000000,
 //   },
+//   storage: multerUploader,
 // });
+
+// export const videoUpload = multer({ storage: videoExtension });
+
+export const videoUpload = multer({
+  dest: "uploads/videos/",
+  limits: {
+    fileSize: 10000000,
+  },
+  storage: multerUploader,  
+});
