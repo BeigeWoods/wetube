@@ -2,7 +2,7 @@ import User from "../models/User";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 
-let thumbUrl;
+// let thumbUrl;
 
 export const home = async (req, res) => {
   const videos = await Video.find({})
@@ -84,15 +84,12 @@ export const postUpload = async (req, res) => {
     user: { _id },
   } = req.session;
   const { location: fileUrl } = req.file;
-  // const { video, thumb } = req.files;
   const { title, description, hashtags } = req.body;
-  // getThumbnail(video[0].path);
   try {
     const newVideo = await Video.create({
       title,
       description,
       fileUrl,
-      // thumbUrl: thumb ? thumb[0].location : thumbUrl,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
