@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Wetube Reloaded
 
 / -> Home
@@ -16,9 +14,3 @@
 /videos/:id/edit -> Edit Video
 /videos/:id/delete -> Delete Video
 /videos/upload -> Upload Video
-=======
-# wetube
->>>>>>> 61d95537ddc810265245d662ee424df4b1b7357c
-=======
-# wetube
->>>>>>> 61d95537ddc810265245d662ee424df4b1b7357c
